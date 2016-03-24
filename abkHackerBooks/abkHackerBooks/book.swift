@@ -8,13 +8,22 @@
 
 import UIKit
 
-class book: Equatable {
+class book: Equatable, Comparable {
     //MARK:- Properties
     let title: String
     let author: [String]
     let tags: [String]?
     let bookImage: UIImage?
     let bookPdf: String
+
+    var isFavorite: Bool = false
+    
+    //MARK: - Computed Variables
+    var authorJoin : String {
+        get {
+           return author.joinWithSeparator(",")
+        }
+    }
 
     init ( title: String,
          author: [String],
@@ -27,12 +36,24 @@ class book: Equatable {
             self.bookImage = bookImage
             self.bookPdf = bookPdf
     }
+    
     //MARK: - Proxies
     var proxyForComparison : String{
         
         get{
-            let authorJoin = author.joinWithSeparator(",")
-            return "\(title)\(authorJoin))"
+            return "\(title)\(authorJoin)"
+        }
+    }
+    
+    var  proxyForSorting : String{
+        get {
+            if (isFavorite){
+            return "A\(title)\(authorJoin)"
+            }
+            else {
+               return "Z\(title)\(authorJoin)"
+            }
+            
         }
     }
 
@@ -54,4 +75,9 @@ func ==(lhs: book, rhs: book) -> Bool {
     // Caso genérico
     return (lhs.proxyForComparison == rhs.proxyForComparison)
     
+}
+func <(lhs: book, rhs: book) -> Bool{
+    
+    
+    return  (lhs.proxyForSorting < rhs.proxyForSorting)
 }
