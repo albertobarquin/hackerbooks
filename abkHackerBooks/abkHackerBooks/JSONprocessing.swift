@@ -77,20 +77,25 @@ func decodeBook (bookToDecode json: JSONDictionary) throws -> strictBook {
     var tags = Set<String>()
     var authors = [String]()
     
-    if let tags_hash = json[JSONKeys.tags.rawValue] as? String {
-        let tags_array = tags_hash.componentsSeparatedByString(", ")
-        //No he encontrado otra forma de convertir un array en un set que no sea iterar el array
-        for tag in tags_array{ tags.insert(tag)}
-    }
-    if let authors_hash = json[JSONKeys.authors.rawValue] as? String {
+    if  let title = json[JSONKeys.title.rawValue] as? String,
+        let tags_hash = json[JSONKeys.tags.rawValue] as? String,
+        let authors_hash = json[JSONKeys.authors.rawValue] as? String{
+        
+       //: TODO refactor: crear una función para tags y authors, usando genericos o cambiando los dos a sets
         let authors_arr = authors_hash.componentsSeparatedByString(", ")
         for author in authors_arr{ authors.append(author)}
-    }
-      let title = json[JSONKeys.title.rawValue] as? String
+        
+        let tags_array = tags_hash.componentsSeparatedByString(", ")
+        for tag in tags_array{ tags.insert(tag)}
+        
+        
+        return strictBook (title: title, authors: authors, tags: tags, image_url: image_url, pdf_url: pdf_url)
     
-  
-
-return strictBook (title: title!, authors: authors, tags: tags, image_url: image_url, pdf_url: pdf_url)
+    }
+    else {
+        throw JSONProcessingError.WrongJSONFormat
+    }
+    
 }
 
 
