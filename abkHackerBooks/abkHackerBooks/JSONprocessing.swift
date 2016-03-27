@@ -80,7 +80,8 @@ func decodeBook (bookToDecode json: JSONDictionary) throws -> strictBook {
     if  let title = json[JSONKeys.title.rawValue] as? String,
         let tags_hash = json[JSONKeys.tags.rawValue] as? String,
         let authors_hash = json[JSONKeys.authors.rawValue] as? String{
-       
+        
+       //: TODO refactor: crear una función para tags y authors, usando genericos o cambiando los dos a sets
         let authors_arr = authors_hash.componentsSeparatedByString(", ")
         for author in authors_arr{ authors.append(author)}
         
@@ -95,24 +96,6 @@ func decodeBook (bookToDecode json: JSONDictionary) throws -> strictBook {
         throw JSONProcessingError.WrongJSONFormat
     }
     
-//    {
-//        let tags_array = tags_hash.componentsSeparatedByString(", ")
-//        
-//        for tag in tags_array{ tags.insert(tag)}
-//    }
-//    if let authors_hash = json[JSONKeys.authors.rawValue] as? String {
-//        let authors_arr = authors_hash.componentsSeparatedByString(", ")
-//        for author in authors_arr{ authors.append(author)}
-//    }
-//      let title = json[JSONKeys.title.rawValue] as? String
-//    
-//    
-    
-    
-    
-  
-
-
 }
 
 
