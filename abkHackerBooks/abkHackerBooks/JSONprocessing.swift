@@ -20,13 +20,13 @@ import UIKit
  }
  
  */
-// MARK _ Type alias
-//MARK: - Aliases
+// MARK: - Type alias
 // se los tomo prestados a Fernando de momento
 
 typealias JSONObject        = AnyObject
 typealias JSONDictionary    = [String:JSONObject]
 typealias JSONArray         = [JSONDictionary]
+
 
 enum JSONKeys: String{
     case title      = "title"
@@ -45,10 +45,13 @@ enum JSONProcessingError : ErrorType{
 }
 
 
-//MARK - Global Variables
+//MARK: - Global Variables
 var tags  = Set<String> ()
+// MARK: - Constants
 
-//MARK - Sstructs
+let booksJSONURL : String = "https://t.co/K9ziV0z3SJ"
+
+//MARK: - Sstructs
 struct strictBook{
     let title       : String
     let authors     : [String]
@@ -57,7 +60,7 @@ struct strictBook{
     let pdf_url     : NSURL
 }
 
-// MARK - Decoding
+// MARK: - Decoding
 
 func decodeBook (bookToDecode json: JSONDictionary) throws -> strictBook {
     
@@ -88,7 +91,6 @@ func decodeBook (bookToDecode json: JSONDictionary) throws -> strictBook {
         let tags_array = tags_hash.componentsSeparatedByString(", ")
         for tag in tags_array{ tags.insert(tag)}
         
-        
         return strictBook (title: title, authors: authors, tags: tags, image_url: image_url, pdf_url: pdf_url)
     
     }
@@ -98,8 +100,32 @@ func decodeBook (bookToDecode json: JSONDictionary) throws -> strictBook {
     
 }
 
+// decode para la librería
+func decodeBooks(books json: JSONArray) throws -> [strictBook]{
+    let books = try json.map({try decodeBook( bookToDecode: $0)})
+    return books
+}
 
 
+// MARK: - DONWLOADING JSON
+
+func donwloadJSON () throws -> Void{
+    guard let endpoint = NSURL(string: booksJSONURL) else{ throw JSONProcessingError.ResourcePointedByURLNotReachable}
+    let request = NSMutableURLRequest(URL: endpoint)
+    NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
+        do {
+            guard let dat = data
+                else {throw JSONProcessingError.ResourcePointedByURLNotReachable }
+            guard let json = try NSJSONSerialization.JSONObjectWithData(dat, options: []) as? JSONArray else {throw JSONProcessingError.ResourcePointedByURLNotReachable}
+            
+            try decodeBooks(books: json)
+            
+        } catch  let error as JSONProcessingError{
+        
+        
+        }catch {  } }.resume()
+
+}
 
 
 

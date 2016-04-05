@@ -8,7 +8,7 @@
 
 import UIKit
 
-class book: Equatable, Comparable {
+class Book: Equatable, Comparable {
     //MARK:- Properties
     let title: String
     let author: [String]
