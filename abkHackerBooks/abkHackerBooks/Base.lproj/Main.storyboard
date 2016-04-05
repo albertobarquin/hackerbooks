@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="96J-Rc-t1u">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -21,42 +21,51 @@
             </objects>
             <point key="canvasLocation" x="-8" y="1107"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="uC1-C9-yYm">
+        <!--Library-->
+        <scene sceneID="lYn-Ot-7DU">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="fBh-Fa-yyd" customClass="LybraryViewController" customModule="abkHackerBooks" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ks5-1i-u0z">
+                <tableViewController id="BSP-i1-M10" userLabel="Library" customClass="LybraryViewController" customModule="abkHackerBooks" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Y4-Aa-583">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NSl-iw-v8L">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="xWk-3c-NDz" style="IBUITableViewCellStyleDefault" id="utT-jv-0y6">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NSl-iw-v8L" id="iOP-wP-rkE">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="utT-jv-0y6" id="bcl-6P-dDg">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xWk-3c-NDz">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="f3f-ah-E9h" kind="showDetail" id="SH1-Yt-JeB"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="fBh-Fa-yyd" id="n7G-nO-jrn"/>
-                            <outlet property="delegate" destination="fBh-Fa-yyd" id="RvS-HH-KoH"/>
+                            <outlet property="dataSource" destination="BSP-i1-M10" id="pbQ-el-7lt"/>
+                            <outlet property="delegate" destination="BSP-i1-M10" id="USh-Q3-WIB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="9o6-46-ljr"/>
-                    <connections>
-                        <segue destination="f3f-ah-E9h" kind="showDetail" id="13L-WZ-c4B"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="Svg-QJ-Shw"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1wt-1e-roe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOu-3P-RQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="876" y="339"/>
         </scene>
-        <!--View Controller-->
+        <!--Book View Controller-->
         <scene sceneID="fk2-OE-JUZ">
             <objects>
-                <viewController id="t3j-ZD-0zE" sceneMemberID="viewController">
+                <viewController id="t3j-ZD-0zE" customClass="BookViewController" customModule="abkHackerBooks" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M6x-du-CHu"/>
                         <viewControllerLayoutGuide type="bottom" id="7Ej-Tp-Igh"/>
@@ -64,18 +73,24 @@
                     <view key="view" contentMode="scaleToFill" id="eHb-Sp-HYn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfM-JD-scT">
+                                <rect key="frame" x="279" y="289" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="uXe-eL-72R"/>
                     <connections>
-                        <segue destination="Jtr-Ej-iTc" kind="popoverPresentation" id="ggn-oG-nnN">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
+                        <segue destination="Jtr-Ej-iTc" kind="show" identifier="showBookPDF" id="n5O-ns-xid"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYZ-Tq-1N6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="1107"/>
+            <point key="canvasLocation" x="814" y="1107"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="dnu-B2-wW1">
@@ -104,7 +119,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fBh-Fa-yyd" kind="relationship" relationship="rootViewController" id="cfy-jm-Rpg"/>
+                        <segue destination="BSP-i1-M10" kind="relationship" relationship="rootViewController" id="wo2-hT-GWc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="waB-oO-lN2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -126,6 +141,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="13L-WZ-c4B"/>
+        <segue reference="SH1-Yt-JeB"/>
     </inferredMetricsTieBreakers>
 </document>
