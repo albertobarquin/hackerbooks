@@ -15,7 +15,6 @@ class Book: Equatable, Comparable {
     let tags: [String]?
     let bookImage: UIImage?
     let bookPdf: String
-
     var isFavorite: Bool = false
     
     //MARK: - Computed Variables
@@ -61,7 +60,7 @@ class Book: Equatable, Comparable {
 
 
 }
-func ==(lhs: book, rhs: book) -> Bool {
+func ==(lhs: Book, rhs: Book) -> Bool {
     //1er caso: son el mismo objeto
     guard !(lhs === rhs) else{
         return true
@@ -76,7 +75,7 @@ func ==(lhs: book, rhs: book) -> Bool {
     return (lhs.proxyForComparison == rhs.proxyForComparison)
     
 }
-func <(lhs: book, rhs: book) -> Bool{
+func <(lhs: Book, rhs: Book) -> Bool{
     
     
     return  (lhs.proxyForSorting < rhs.proxyForSorting)
